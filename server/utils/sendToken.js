@@ -5,8 +5,9 @@ export const sendToken = (user, statusCode, res, message = "Success") => {
     expiresIn: "1h",
   });
   res.cookie("token", token, {
-    secure: false,
-    maxAge: 3600000,
+    httpOnly: true,
+    secure: true,
+    maxAge: 24 * 60 * 60 * 1000,
     sameSite: "Lax",
   });
   res.status(statusCode).json({

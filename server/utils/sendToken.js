@@ -8,7 +8,7 @@ export const sendToken = (user, statusCode, res, message = "Success") => {
     httpOnly: true,
     secure: true,
     maxAge: 24 * 60 * 60 * 1000,
-    sameSite: "Lax",
+    sameSite: "Strict",
   });
   res.status(statusCode).json({
     message,

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Context } from "../main";
 import ChatSidebar from "../components/ChatSidebar";
 import toast from "react-hot-toast";
+import ReactMarkdown from 'react-markdown';
 
 const ChatPage = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const ChatPage = () => {
   const fetchChatHistory = async () => {
     try {
       const { data } = await axios.get(
-        "https://ai-chatbot-genieai-backend.onrender.com/api/v1/chat/history",
+        "http://localhost:5001/api/v1/chat/history",
         { withCredentials: true }
       );
       if (data.success && data.data) {
@@ -43,7 +44,7 @@ const ChatPage = () => {
     setIsLoading(true);
     try {
       const { data } = await axios.post(
-        "https://ai-chatbot-genieai-backend.onrender.com/api/v1/chat/message",
+        "http://localhost:5001/api/v1/chat/message",
         { prompt },
         { withCredentials: true }
       );
@@ -67,6 +68,16 @@ const ChatPage = () => {
     } catch (error) {
       toast.error("Failed to clear history");
     }
+  };
+
+  // Function to format code blocks
+  const formatCodeBlock = (text) => {
+    if (!text) return text;
+    
+    // Replace triple backticks with proper markdown
+    return text.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, language, code) => {
+      return `\`\`\`${language || ''}\n${code.trim()}\n\`\`\``;
+    });
   };
 
   return (
@@ -103,10 +114,12 @@ const ChatPage = () => {
                     </div>
                   </div>
                   
-                  {/* AI response */}
+                  {/* AI response with markdown formatting */}
                   <div className="flex justify-start">
-                    <div className="bg-gray-300 text-black shadow-md p-3 rounded-lg rounded-bl-none max-w-[80%] break-words">
-                      <p>{chat.response}</p>
+                    <div className="bg-gray-300 text-black shadow-md p-3 rounded-lg rounded-bl-none max-w-[80%] break-words prose prose-sm">
+                      <ReactMarkdown>
+                        {formatCodeBlock(chat.response)}
+                      </ReactMarkdown>
                     </div>
                   </div>
                 </div>

@@ -16,7 +16,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow requests only from this origin
+    origin: "https://ai-chatbot-genieai-frontend.onrender.com", // Allow requests only from this origin
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     credentials: true, // Include cookies or authorization headers
   })

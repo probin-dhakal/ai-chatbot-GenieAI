@@ -12,7 +12,7 @@ const ChatSidebar = ({ onNewChat, activeChat, onSelectChat, onClearHistory }) =>
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:5001/api/v1/user/logout", {
+      await axios.get("https://ai-chatbot-genieai-backend.onrender.com/api/v1/user/logout", {
         withCredentials: true,
       });
       

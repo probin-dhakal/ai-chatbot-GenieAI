@@ -26,7 +26,7 @@ const Login = () => {
     try {
       setLoading(true);
       await axios.post(
-        "http://localhost:5001/api/v1/user/login",
+        "https://ai-chatbot-genieai-backend.onrender.com/api/v1/user/login",
         { email, password },
         {
           withCredentials: true,

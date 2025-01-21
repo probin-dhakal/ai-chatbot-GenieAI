@@ -24,7 +24,7 @@ const ChatPage = () => {
   const fetchChatHistory = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5001/api/v1/chat/history",
+        "https://ai-chatbot-genieai-backend.onrender.com/api/v1/chat/history",
         { withCredentials: true }
       );
       if (data.success && data.data) {
@@ -43,7 +43,7 @@ const ChatPage = () => {
     setIsLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:5001/api/v1/chat/message",
+        "https://ai-chatbot-genieai-backend.onrender.com/api/v1/chat/message",
         { prompt },
         { withCredentials: true }
       );
